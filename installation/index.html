@@ -5,20 +5,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Inspector PHP</title>
+  <title>Installation - Inspector PHP</title>
   
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="./css/highlight.css">
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script>
 
   <style>
     body {font-size: 90%;}
@@ -34,7 +34,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> Inspector PHP</a>
+        <a href=".." class="icon icon-home"> Inspector PHP</a>
         
       </div>
 
@@ -43,21 +43,21 @@
     
         
             <li class="toctree-l1 ">
-                <a class="" href="introduction/">Introduction</a>
+                <a class="" href="../introduction">Introduction</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 current">
+                <a class="current" href=".">Installation</a>
             </li>
         
 
     
         
             <li class="toctree-l1 ">
-                <a class="" href="installation/">Installation</a>
-            </li>
-        
-
-    
-        
-            <li class="toctree-l1 ">
-                <a class="" href="quickstart/">Quick Start</a>
+                <a class="" href="../quickstart">Quick Start</a>
             </li>
         
 
@@ -66,17 +66,17 @@
         <span>Manual</span>
             
                 <li class="toctree-l1 ">
-                    <a class="" href="manual/">Getting started</a>
+                    <a class="" href="../manual">Getting started</a>
                     
                 </li>
             
                 <li class="toctree-l1 ">
-                    <a class="" href="inspections/">Writing Inspections</a>
+                    <a class="" href="../inspections">Writing Inspections</a>
                     
                 </li>
             
                 <li class="toctree-l1 ">
-                    <a class="" href="issues/">Writing Issues</a>
+                    <a class="" href="../issues">Writing Issues</a>
                     
                 </li>
             
@@ -94,7 +94,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
-        <a href="."></a>
+        <a href=".."></a>
       </nav>
 
       
@@ -102,8 +102,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
-    <li>Welcome</li>
+    <li><a href="..">Docs</a> &raquo;</li>
+    <li>Installation</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -116,13 +116,19 @@
 </div>
           <div role="main">
             <div class="section">
-              <h1 id="welcome-to-inspector-php">Welcome to Inspector PHP</h1>
-<p>The framework lets you write 'Inspections' for any type of data, and raise 'Issues' when needed.</p>
-<p>The issues contain (translatable) user-level error messages, proposed solutions, and hyperlinks to fix the issue.</p>
-<h2 id="brought-to-you-by-the-linkorb-engineering-team">Brought to you by the LinkORB Engineering team</h2>
-<p><img src="http://www.linkorb.com/d/meta/tier1/images/linkorbengineering-logo.png" width="200px" /><br />
-Check out our other projects at <a href="http://www.linkorb.com/engineering">linkorb.com/engineering</a>.</p>
-<p>Btw, we're hiring!</p>
+              <h1 id="installation">Installation</h1>
+<p>You usually add inspector to your project's composer.json file (in the <code>require-dev</code> section),
+just like phpunit, phpspec, etc.</p>
+<h2 id="adding-inspector-through-composer">Adding inspector through composer:</h2>
+<p>It is recommended to use composer to install Inspector:</p>
+<pre><code>composer require inspector/inspector &quot;~1.0&quot;
+</code></pre>
+
+<p>Alternatively you can add the following to the require section in your composer.json manually:</p>
+<pre><code>&quot;inspector/inspector&quot;: &quot;~1.0&quot;
+</code></pre>
+
+<p>Run <code>composer update</code> afterwards to install your new project dependency.</p>
 
             </div>
           </div>
@@ -130,8 +136,10 @@ Check out our other projects at <a href="http://www.linkorb.com/engineering">lin
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="introduction/" class="btn btn-neutral float-right" title="Introduction"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../quickstart" class="btn btn-neutral float-right" title="Quick Start"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
+      
+        <a href="../introduction" class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -159,8 +167,8 @@ Check out our other projects at <a href="http://www.linkorb.com/engineering">lin
         
             <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
         
-      <span><a href="" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      <span style="margin-left: 15px"><a href="introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../introduction" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      <span style="margin-left: 15px"><a href="../quickstart" style="color: #fcfcfc">Next &raquo;</a></span>
     </span>
 </div>
 </body>

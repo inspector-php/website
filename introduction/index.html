@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction - Inspector PHP</title>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script>
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Inspector PHP</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      <ul class="current">
+    
+        
+            <li class="toctree-l1 current">
+                <a class="current" href=".">Introduction</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../installation">Installation</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../quickstart">Quick Start</a>
+            </li>
+        
+
+    
+        
+        <span>Manual</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../manual">Getting started</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../inspections">Writing Inspections</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../issues">Writing Issues</a>
+                    
+                </li>
+            
+        
+
+    
+</ul>
+
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href=".."></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/inspector-php/website/" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <h1 id="introduction">Introduction</h1>
+<p>Inspector is a testing application for <em>data</em>.</p>
+<p>While you use excellent tools such as phpspec, phpunit, behat, etc for your unit and functional tests,
+you can use inspector to test your production data.</p>
+<h2 id="why-use-inspector">Why use Inspector?</h2>
+<p>It is really hard to know if all data in your production databases is valid.</p>
+<ul>
+<li>You never know what users do, it's unrealistic to validate <em>everything</em>.</li>
+<li>It's not just your application's UI accepting data. You need to think about importers, legacy data, api's and other suspicious sources.</li>
+<li>You may validate all user input <em>now</em>, but what about the data that entered your databases <em>before</em> you added validation?</li>
+<li>It's not just database integrity checking that matters. Sometimes complex combinations of data result in new problems.</li>
+</ul>
+<h2 id="why-we-developed-inspector">Why we developed Inspector</h2>
+<p>At LinkORB we're hosting hundreds of customer databases, with hundreds of tables and thousands of rows.</p>
+<p>We noticed that our our support engineers spent a lot of time inspecting customer databases to find and solve problems.
+We find all sorts of issues: Unexpected input, data inconsistencies, importer problems, mis-configurations, etc etc.</p>
+<p>This lead us to the idea of automating those data inspections. This way, we can inspect <em>all</em> systems, <em>daily</em> and <em>pre-emptively</em>.</p>
+<p>For each issue that's detected, a 'solution' is presented to either the user, or our support engineers, depending
+on if the user can solve the problem through the app's UI.</p>
+<h3 id="benefits-for-our-users">Benefits for our users:</h3>
+<ul>
+<li>We find and solve issues before they do.</li>
+<li>Less need to send support tickets.</li>
+</ul>
+<h3 id="benefits-for-us">Benefits for us:</h3>
+<ul>
+<li>We can fix detected issues early, preventing furher unexpected behaviour.</li>
+<li>Once we automate an inspection, we know it will be detected in the future.</li>
+<li>Once we automate an inspection, we know it will be detected in all databases.</li>
+<li>Detected issues all provide a human-readable solution, simplifying support.</li>
+</ul>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../installation" class="btn btn-neutral float-right" title="Installation"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Welcome"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+            <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+        
+      <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      <span style="margin-left: 15px"><a href="../installation" style="color: #fcfcfc">Next &raquo;</a></span>
+    </span>
+</div>
+</body>
+</html>

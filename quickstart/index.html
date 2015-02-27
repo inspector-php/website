@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quick Start - Inspector PHP</title>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script>
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Inspector PHP</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      <ul class="current">
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../introduction">Introduction</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../installation">Installation</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 current">
+                <a class="current" href=".">Quick Start</a>
+            </li>
+        
+
+    
+        
+        <span>Manual</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../manual">Getting started</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../inspections">Writing Inspections</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../issues">Writing Issues</a>
+                    
+                </li>
+            
+        
+
+    
+</ul>
+
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href=".."></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    <li>Quick Start</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/inspector-php/website/" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <h2 id="using-inspector">Using Inspector</h2>
+<h2 id="create-an-inspection-class">Create an Inspection class</h2>
+<p>You can create a new Inspection class for each type of data that you want to inspect. For example a <code>UserInspector</code></p>
+<pre><code class="php">namespace Acme\Inspector\Inspection;
+
+use Inspector\Inspection\InspectionInterface;
+use Acme\Inspector\Issue\UserWithoutPasswordIssue;
+use PDO;
+
+// As a convention, end the classname with &quot;Inspection&quot;
+class UserInspection
+{
+    private $pdo;
+
+    // Request dependencies from the container
+    public function __construct(PDO $pdo)
+    {
+        $this-&gt;pdo = $pdo;
+    }
+
+    // The inspector will run all methods starting with `inspect`
+    public function inspectPasswords(InspectionInterface $inspection)
+    {
+        // Query for users without a password
+        $res = $pdo-&gt;queryForUsersWithoutPasswords();
+
+        // Loop through the results
+        foreach ($res as $row) {
+            // Instantiate a new issue for each user without a password
+            $issue = new UserWithoutPasswordIssue($inspection);
+
+            // Attach arbitrary data to the issue for later usage in the templates
+            $issue-&gt;setData('username', $row['username']);
+            $issue-&gt;setData('userid', $row['id']);
+
+            // Add this new issue to the inspection
+            $inspection-&gt;addIssue($issue);
+        }
+    }
+}
+</code></pre>
+
+<h2 id="create-an-issue-class">Create an Issue class</h2>
+<p>Each issue is described in it's own class, in this case <code>UserWithoutPasswordIssue</code>:</p>
+<pre><code class="php">
+namespace Acme\Inspector\Issue;
+
+use Inspector\Issue\IssueInterface;
+use Inspector\Issue\BaseIssue
+
+/*
+ * An issue must implement the IssueInterface
+ * To simplify this, simply extend from the BaseIssue
+ */
+class UserWithoutPasswordIssue extends BaseIssue implements IssueInterface
+{
+    // Optionally provide links to where to solve the issue
+    public function getLinks()
+    {   
+        $links = array();
+        $links[] = new Link(
+            '/users/' . $this-&gt;getData('userid') .
+            '/resetpassword', 'Reset password'
+        );
+        return $links;
+    }
+}
+</code></pre>
+
+<h2 id="creating-a-inspection-suite-file">Creating a inspection suite file</h2>
+<p>You can define a set of inspections in a YAML file for quick loading and running.
+The YAML file supports includes, and lets you specify classnames that contain <code>inspect</code> methods:</p>
+<pre><code class="yaml">include:
+    - other.yml
+
+classes:
+    - Acme\Inspection\UserInspection
+</code></pre>
+
+<h2 id="run-inspections">Run inspections</h2>
+<p>You can run your inspection suite from the command-line,
+or from your own code (controller, console commands, api, etc)</p>
+<h3 id="running-inspections-from-your-own-code">Running inspections from your own code</h3>
+<pre><code class="php">use Inspector\Inspector;
+use Inspector\Loader\YamlLoader;
+use Inspector\Formatter\ConsoleFormatter;
+
+// Create a new container, or reuse an existing one (Symfony DI, Pimple, etc)
+$container = array(); 
+$container['pdo'] = $myPdoHandle;
+
+// Instantiate a new Inspector
+$inspector = new Inspector($container);
+
+// Use a YamlLoader to quickly import a suite of Inspections
+$loader = new YamlLoader();
+$loader-&gt;load($inspector, '/my/inspector/suite.yml');
+
+// Run all the inspections
+$inspector-&gt;run();
+
+// Create a new formatter to display the output
+$formatter = new ConsoleFormatter();
+
+// Echo out the formatted inspector results
+echo $formatter-&gt;format($inspector);
+</code></pre>
+
+<h2 id="running-inspections-from-the-console">Running inspections from the console</h2>
+<p>A console command is included, you can run it like this:</p>
+<pre><code class="bash">vendor/bin/inspector inspector:run path/to/my/suite.yml
+</code></pre>
+
+<p>This runs the inspection suite, and outputs the results to the console.</p>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../manual" class="btn btn-neutral float-right" title="Getting started"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../installation" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+            <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+        
+      <span><a href="../installation" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      <span style="margin-left: 15px"><a href="../manual" style="color: #fcfcfc">Next &raquo;</a></span>
+    </span>
+</div>
+</body>
+</html>
