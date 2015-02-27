@@ -1,0 +1,18 @@
+site_name: Inspector PHP
+site_url: http://www.inspector-php.org/
+site_description: Project documentation for Inspector PHP
+
+repo_url: https://github.com/inspector-php/website/
+
+pages:
+- [index.md, Welcome]
+- [introduction.md, Introduction]
+- [installation.md, Installation]
+- [quickstart.md, Quick Start]
+- [manual.md, 'Manual', 'Getting started']
+- [inspections.md, 'Manual', 'Writing Inspections']
+- [issues.md, 'Manual', 'Writing Issues']
+
+theme: readthedocs
+copyright: Copyright &copy; 2015, <a href="http://engineering.linkorb.com">LinkORB Engineering</a>.
+google_analytics: ['UA-27795084-5', 'mkdocs.org']
